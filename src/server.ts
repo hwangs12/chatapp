@@ -21,6 +21,6 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(Number(process.env.PORT) || 3000, "localhost", 10, () => {
+server.listen(Number(process.env.PORT) || 3000, "0.0.0.0", 10, () => {
     console.log("Server running at localhost 3000");
 });
