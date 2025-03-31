@@ -83,14 +83,14 @@
 
             socket.on("notify users", () => {
                 const item = document.createElement("li");
-                item.textContent = navigator.userAgent;
+                item.textContent = navigator.userAgent + window.ip;
                 messages.appendChild(item);
                 window.scrollTo(0, document.body.scrollHeight);
             });
         </script>
         <script>
             function getIP(json) {
-                console.log(json.ip);
+                window.ip = json.ip
             }
         </script>
         <script src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
