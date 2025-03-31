@@ -80,6 +80,19 @@
                 messages.appendChild(item);
                 window.scrollTo(0, document.body.scrollHeight);
             });
+
+            socket.on("notify users", () => {
+                const item = document.createElement("li");
+                item.textContent = navigator.userAgent;
+                messages.appendChild(item);
+                window.scrollTo(0, document.body.scrollHeight);
+            });
         </script>
+        <script>
+            function getIP(json) {
+                console.log(json.ip);
+            }
+        </script>
+        <script src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
     </body>
 </html>
