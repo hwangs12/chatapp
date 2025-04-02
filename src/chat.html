@@ -81,9 +81,9 @@
                 window.scrollTo(0, document.body.scrollHeight);
             });
 
-            socket.on("notify users", () => {
+            socket.on("welcome user", () => {
                 const item = document.createElement("li");
-                item.textContent = navigator.userAgent;
+                item.textContent = "Hi There, welcome to chat"
                 messages.appendChild(item);
                 window.scrollTo(0, document.body.scrollHeight);
             });

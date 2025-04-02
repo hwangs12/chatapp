@@ -42,7 +42,7 @@ const server = createServer((req, res) => {
 const io = new Server(server);
 
 io.on("connection", (socket) => {
-    io.emit("notify users");
+    io.emit("welcome user");
     socket.on("chat message", (msg) => {
         io.emit("distributed chat", msg);
     });
