@@ -4,10 +4,11 @@ import fs from "fs";
 import path from "path";
 
 import { loginPassed } from "./login";
+import { sendFile } from "./sendFile";
 
 const loginPage = fs.readFileSync(path.resolve("src", "login.html"));
 const chatPage = fs.readFileSync(path.resolve("src", "chat.html"));
-const unauthorizedPage = fs.readFileSync(path.resolve("src", "unauthorized.html"))
+const unauthorizedPage = fs.readFileSync(path.resolve("src", "401.html"))
 
 const server = createServer((req, res) => {
     const url = req.url;
@@ -37,6 +38,8 @@ const server = createServer((req, res) => {
                 res.end(unauthorizedPage);
             }
         });
+    } else if (url === '/src/client.js') {
+        sendFile(res, path.resolve("src", "client.js"), "text/javascript", 200);
     }
 });
 const io = new Server(server);
