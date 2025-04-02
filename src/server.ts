@@ -3,11 +3,18 @@ import { Server } from "socket.io";
 import fs from "fs";
 import path from "path";
 
-var html = fs.readFileSync(path.resolve("src", "hello-world.html"));
+const loginPage = fs.readFileSync(path.resolve("src", "login.html"));
+const chatPage = fs.readFileSync(path.resolve("src", "chat.html"));
 
 const server = createServer((req, res) => {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(html);
+    const url = req.url;
+    if (url === '/') {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(loginPage); //end the response
+    } else if (url ==='/chat'){
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(chatPage);
+    }
 });
 const io = new Server(server);
 
