@@ -1,18 +1,19 @@
 import fs from "fs";
+import path from 'path'
+import { fileURLToPath } from 'url';
 
-export function sendFile(res, filename, contentType, status) {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export function sendFile(res, file) {
+    const filename = path.join(__dirname, file);
     fs.readFile(filename, (err, data) => {
         if (err) {
-            // Couldn't read the file, send a 404
-
-            // Couldn't even find the 404 file, send a minimal plaintext 404
-            res.writeHead(404, { "Content-Type": "text/plain" });
-            res.write("The requested resource does not exist on this server.");
+            console.log(err);
+            res.statusCode = 404;
             res.end();
         } else {
-            res.writeHead(status, { "Content-Type": contentType });
-            res.write(data);
-            res.end();
+            res.end(data);
         }
-    });
+    })
 }

@@ -38,8 +38,9 @@ const server = createServer((req, res) => {
                 res.end(unauthorizedPage);
             }
         });
-    } else if (url === '/src/client.js') {
-        sendFile(res, path.resolve("src", "client.js"), "text/javascript", 200);
+    } else if (url === '/client.js') {
+        res.writeHead(200, { "Content-Type": "text/javascript" });
+        sendFile(res, "client.js");
     }
 });
 const io = new Server(server);

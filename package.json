@@ -20,6 +20,8 @@
     "utf-8-validate": "^6.0.5"
   },
   "devDependencies": {
-    "tsx": "^4.19.3"
+    "ts-loader": "^9.5.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   }
 }
