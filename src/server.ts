@@ -27,13 +27,11 @@ const server = createServer((req, res) => {
             if (loginPassed(body)) {
                 res.writeHead(302, {
                     Location: "/chat",
-                    //add other headers here...
                 });
                 res.end();
             } else {
                 res.writeHead(401, {
                     Location: "/",
-                    //add other headers here...
                 });
                 res.end(unauthorizedPage);
             }
