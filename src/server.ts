@@ -13,8 +13,8 @@ const unauthorizedPage = fs.readFileSync(path.resolve("src", "401.html"))
 const server = createServer((req, res) => {
     const url = req.url;
     if (url === "/") {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(loginPage); //end the response
+        res.writeHead(301, { location: "/enter" });
+        res.end(); //end the response
     } else if (url === "/chat") {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(chatPage);
@@ -30,8 +30,8 @@ const server = createServer((req, res) => {
                 });
                 res.end();
             } else {
-                res.writeHead(401, {
-                    Location: "/",
+                res.writeHead(302, {
+                    Location: "/unauthorized",
                 });
                 res.end(unauthorizedPage);
             }
@@ -39,6 +39,12 @@ const server = createServer((req, res) => {
     } else if (url === '/client.js') {
         res.writeHead(200, { "Content-Type": "text/javascript" });
         sendFile(res, "client.js");
+    } else if (url === '/enter') {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(loginPage);
+    } else if (url === '/unauthorized') {
+        res.writeHead(401, { "Content-Type": "text/html" });
+        res.end(unauthorizedPage);
     }
 });
 const io = new Server(server);
